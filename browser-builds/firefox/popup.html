@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TraceX</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="popup">
+    <div class="brand"><div class="logo">T</div><div><h1>TraceX</h1><p>Browser History Vault</p></div></div>
+    <div class="retention">AUTO-RETENTION <strong>2 MONTHS</strong></div>
+    <section class="stat"><span>Saved visits</span><strong id="visitCount">0</strong></section>
+    <section class="stat"><span>Tracking status</span><strong id="status">Checking…</strong></section>
+    <p class="hint" id="captureDiagnostic" aria-live="polite">Checking last capture…</p>
+    <button id="toggleTracking" class="secondary">Pause tracking</button>
+    <button id="openDashboard" class="primary">Open TraceX dashboard</button>
+    <p class="hint">Records are stored locally. TraceX keeps captured records for two calendar months, then automatically removes expired records.</p>
+  </main>
+  <script src="db.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

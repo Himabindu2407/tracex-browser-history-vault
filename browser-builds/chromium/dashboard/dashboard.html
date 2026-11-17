@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TraceX Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <header class="top"><div class="brandline"><div class="logo">T</div><div><div class="eyebrow">TRACEX · LOCAL BROWSER HISTORY</div><h1>TraceX <span>History Vault</span></h1><p>Independent browsing records, stored on this device</p></div></div><div class="pill" id="trackingState">● Tracking active</div></header>
+  <main>
+    <section class="notice"><strong>2-month retention policy</strong><span>Records older than two calendar months are automatically deleted. New visits continue to be recorded while tracking is enabled.</span></section>
+    <section class="cards">
+      <article class="card"><small>Total saved visits</small><strong id="totalVisits">0</strong></article>
+      <article class="card"><small>Unique websites</small><strong id="uniqueDomains">0</strong></article>
+      <article class="card"><small>History deletion events</small><strong id="deletionEvents">0</strong></article>
+    </section>
+    <section class="toolbar">
+      <input id="search" type="search" placeholder="Search website, title or domain…">
+      <input id="fromDate" type="date" aria-label="From date">
+      <input id="toDate" type="date" aria-label="To date">
+      <button id="refresh">Refresh</button>
+    </section>
+    <section class="panel">
+      <div class="panelhead"><div><h2>Browsing history</h2><p>Most recent visits first</p></div><div class="actions"><button id="exportCsv" class="secondary">Export CSV</button><button id="exportJson" class="secondary">Export JSON</button></div></div>
+      <div class="tablewrap"><table><thead><tr><th>Website / Page</th><th>Domain</th><th>Visited at</th></tr></thead><tbody id="historyRows"><tr><td colspan="3" class="empty">Loading records…</td></tr></tbody></table></div>
+      <p id="resultCount" class="foot"></p><div class="pagination" id="pagination"><button id="prevPage" class="secondary" type="button">Previous</button><span id="pageStatus">Page 1 of 1</span><button id="nextPage" class="secondary" type="button">Next</button></div>
+    </section>
+    <section class="panel retention-test">
+      <div class="panelhead"><div><h2>Retention self-test</h2><p>Creates temporary synthetic records, runs the real cleanup function, verifies the results, then removes all test fixtures.</p></div><button id="runRetentionTest">Run retention test</button></div>
+      <div id="retentionTestResult" class="testresult" aria-live="polite">Not run yet.</div>
+    </section>
+    <section class="panel integrity-test">
+      <div class="panelhead"><div><h2>Phase 2 — Data integrity & recovery test</h2><p>Writes temporary test rows, closes and reopens IndexedDB, checks stored fields and record IDs, then removes only its own test rows.</p></div><button id="runIntegrityTest">Run integrity test</button></div>
+      <div id="integrityTestResult" class="testresult" aria-live="polite">Not run yet.</div>
+    </section>
+    <section class="panel security-test">
+      <div class="panelhead"><div><h2>Phase 3 — Security & privacy test</h2><p>Checks URL allowlisting, dashboard output escaping, CSV formula safety, extension permissions and pause/resume behavior. Uses temporary local test data only.</p></div><button id="runSecurityTest">Run security test</button></div>
+      <div id="securityTestResult" class="testresult" aria-live="polite">Not run yet.</div>
+    </section>
+    <section class="panel performance-test">
+      <div class="panelhead"><div><h2>Phase 4 — Performance & usability test</h2><p>Checks dashboard pagination and rendering boundaries using temporary in-memory sample rows only. Does not write to your history database.</p></div><button id="runPerformanceTest">Run performance test</button></div>
+      <div id="performanceTestResult" class="testresult" aria-live="polite">Not run yet.</div>
+    </section>
+    <section class="panel events"><div class="panelhead"><div><h2>Browser history events</h2><p>Deletion events detected while TraceX tracking was enabled</p></div></div><div id="eventList" class="eventlist">No events recorded.</div></section>
+    <section class="danger"><div><h3>Privacy controls</h3><p>Pause recording or permanently delete TraceX's locally stored records.</p></div><div class="actions"><button id="toggle" class="secondary">Pause tracking</button><button id="clear" class="dangerbtn">Delete TraceX records</button></div></section>
+    <footer>TraceX records URLs and page titles using the browser history permission. It does not collect passwords, form contents or keystrokes. Data remains in this browser profile; uninstalling the extension or clearing its data can remove records. Incognito/private browsing is not captured in this build.</footer>
+  </main>
+  <script src="../db.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
